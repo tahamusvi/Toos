@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'BYekan';
+  src: url('../fonts/BYekan-webfont.eot') format('eot'),
+    url('../fonts/BYekan-webfont.woff') format('woff'),
+    url('../fonts/BYekan-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: 'BYekan';
+}
+a {
+  text-decoration: none;
+}
+
+:root {
+  --light-blue: #00b4d8;
+  --dark-blue: #03045e;
+  --black: #2b2d42;
+  --violet-1: #b429f9;
+  --violet-2: #702b9e;
+  --white: #ddd;
+}
+
+::-webkit-scrollbar {
+  width: 0.4vw;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(158, 158, 158);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
