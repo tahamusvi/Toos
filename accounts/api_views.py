@@ -9,19 +9,6 @@ from random import randint
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import login
 danial = 'fdgfdhj67867sdfsf2343nh'
-
-
-# @api_view(['POST'])
-# def person_create(request):
-#     info = PersonSerializers(data=request.data)
-#     if info.is_valid():
-#         User(name=info.validated_data['name'],age=info.validated_data['age'],phone=info.validated_data['phoneNumber']).save()
-#         # info.save()
-#         return Response({'message':'ok'},status=status.HTTP_201_CREATED)
-#     else:
-#         return Response(info.errors,status=status.HTTP_400_BAD_REQUEST)
-
-
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -41,16 +28,6 @@ def change_password(request, phoneNumber):
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
-
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def pitest(request):
-    return Response({'message': 'is login'}, status=status.HTTP_201_CREATED)
-
-# -------------------------------------------------------------------------------------------------------------------------------
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def user_create(request):
@@ -67,8 +44,6 @@ def user_create(request):
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def code_get(request, phoneNumber):
@@ -87,9 +62,6 @@ def code_get(request, phoneNumber):
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
-# Check Codeing
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def user_update(request, phoneNumber):
@@ -115,9 +87,6 @@ def user_update(request, phoneNumber):
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
-# -------------------------------------------------------------------------------------------------------------------------------
-
-
 @api_view(['GET'])
 def user_get(request, phoneNumber):
     try:

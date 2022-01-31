@@ -77,15 +77,6 @@ TEMPLATES = [
 ]
 
 
-# CORS_ALLOW_HEADERS = list(default_headers) + [
-#     'X-CSRFTOKEN',
-# ]
-# CSRF_COOKIE_NAME = "csrftoken"
-# CSRF_COOKIE_HTTPONLY = False
-
-# CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
-# CORS_ALLOW_CREDENTIALS = True
-
 
 LOGIN_REDIRECT_URL = "main"
 LOGOUT_REDIRECT_URL = ""

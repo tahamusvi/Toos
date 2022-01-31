@@ -1,14 +1,11 @@
 from django.db import models
 
-
 class Grade(models.Model):
     title = models.CharField(max_length=30)
 
     def __str__(self):
         return self.title
 # -----------------------------------
-
-
 class Kind(models.Model):
     title = models.CharField(max_length=30)
     picture = models.ImageField()
@@ -17,8 +14,6 @@ class Kind(models.Model):
     def __str__(self):
         return self.title
 # -----------------------------------
-
-
 class Course(models.Model):
     title_persion = models.CharField(max_length=30)
     title_en = models.CharField(max_length=30)
@@ -33,8 +28,6 @@ class Course(models.Model):
 
     def __str__(self):
         return str(self.title_persion)
-
-
 # ----------------------------------------------------------------------------------------------------------------------------
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
@@ -48,8 +41,6 @@ class Teacher(models.Model):
     def __str__(self):
         return str(self.name)
 # ----------------------------------------------------------------------------------------------------------------------------
-
-
 class giude(models.Model):
     title = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
@@ -58,8 +49,6 @@ class giude(models.Model):
     def __str__(self):
         return str(self.phone)
 # ----------------------------------------------------------------------------------------------------------------------------
-
-
 class soal(models.Model):
     question = models.TextField()
     answer = models.TextField()

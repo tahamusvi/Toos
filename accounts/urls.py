@@ -9,13 +9,6 @@ urlpatterns = [
     path('user/change/password/<slug:phoneNumber>/',
          change_password, name='change_password'),
     path('', include('rest_framework.urls')),
-    path('pi/', pitest),
-
     path('user/info/<slug:phoneNumber>/', user_get, name='user_get'),
     path('csrf/', GetCSRFToken.as_view()),
-    # path('login/<slug:phoneNumber>/',login,name='login'),
-
-    # path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
 ]
