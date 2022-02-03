@@ -9,6 +9,7 @@ ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'accounts.User'
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -20,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'webpack_loader',
 ]
 
 
@@ -56,7 +58,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'toos.urls'
 
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
@@ -146,10 +148,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'react/build/static/')
+    os.path.join(BASE_DIR, 'react/build/static/'),
+    os.path.join(BASE_DIR, 'resources'),
 ]
 
 # Default primary key field type
