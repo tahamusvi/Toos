@@ -5,6 +5,7 @@ from .serializers import *
 from accounts.models import User
 from rest_framework import status
 from .models import Teacher
+from .models import Cover
 danial = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
@@ -26,6 +27,13 @@ def giude_get(request):
         return Response({'message': 'ok created!'}, status=status.HTTP_201_CREATED)
     else:
         return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_cover(request):
+    covers = Cover.objects.all()
+    data = CoverSerializers(covers, many=True)
+    return Response(data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])

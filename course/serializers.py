@@ -17,6 +17,7 @@ class courseSerializers(serializers.ModelSerializer):
         model = Course
         fields = ["title_persion", "title_en", "picture",
                   "link", "video_preview", "grade"]
+# -------------------------------------------------------------------------------------------------------------------------------
 class KindSerializers(serializers.ModelSerializer):
     class Meta:
         model = Kind
@@ -26,3 +27,8 @@ class soalSerializers(serializers.ModelSerializer):
     class Meta:
         model = soal
         fields = ["question", "answer"]
+# -------------------------------------------------------------------------------------------------------------------------------
+class CoverSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Cover
+        fields = ["picture", "title"]

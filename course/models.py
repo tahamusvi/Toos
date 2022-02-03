@@ -5,6 +5,14 @@ class Grade(models.Model):
 
     def __str__(self):
         return self.title
+
+# -----------------------------------
+class Cover(models.Model):
+    title = models.TextField(blank=True, null=True)
+    picture = models.ImageField()
+
+    def __str__(self):
+        return self.title
 # -----------------------------------
 class Kind(models.Model):
     title = models.CharField(max_length=30)
