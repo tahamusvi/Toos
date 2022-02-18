@@ -8,6 +8,7 @@ from course.models import Grade
 from random import randint
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import login
+# REACT_APP_VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
 danial = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])

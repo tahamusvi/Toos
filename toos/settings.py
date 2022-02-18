@@ -21,7 +21,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'webpack_loader',
 ]
 
 
@@ -80,7 +79,7 @@ TEMPLATES = [
 
 
 
-LOGIN_REDIRECT_URL = "main"
+# LOGIN_REDIRECT_URL = "main"
 LOGOUT_REDIRECT_URL = ""
 WSGI_APPLICATION = 'toos.wsgi.application'
 
@@ -153,7 +152,7 @@ STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'react/build/static/'),
-    os.path.join(BASE_DIR, 'resources'),
+    os.path.join(BASE_DIR, 'media/'),
 ]
 
 # Default primary key field type

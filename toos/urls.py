@@ -7,18 +7,18 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='index.html'), name="main"),
+
     path('api/', include('accounts.urls')),
     path('api/', include('course.urls')),
+    # re_path('', TemplateView.as_view(template_name='index.html'), name="main"),
 ]
-
-
-# urlpatterns += [re_path('',
-#                         TemplateView.as_view(template_name='index.html'), name='asli')]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [re_path('',
+    TemplateView.as_view(template_name='index.html'), name='react')]
+
 
 # urlpatterns += staticfiles_urlpatterns()
