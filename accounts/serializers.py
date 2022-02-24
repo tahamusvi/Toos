@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User
-from extends.National_code_validation import Authenticated_National_Code
+
 
 class UserSerializersValid(serializers.ModelSerializer):
     class Meta:

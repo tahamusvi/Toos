@@ -25,8 +25,8 @@ INSTALLED_APPS = [
 
 
 INSTALLED_APPS += [
+    'cart',
     'course.apps.CourseConfig',
-    'extends',
     'accounts.apps.AccountsConfig',
 ]
 
@@ -80,6 +80,7 @@ TEMPLATES = [
 
 
 # LOGIN_REDIRECT_URL = "main"
+LOGIN_REDIRECT_URL = "react"
 LOGOUT_REDIRECT_URL = ""
 WSGI_APPLICATION = 'toos.wsgi.application'
 

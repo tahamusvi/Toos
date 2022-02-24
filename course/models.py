@@ -1,15 +1,15 @@
 from django.db import models
 
+
 class Grade(models.Model):
     title = models.CharField(max_length=30)
 
     def __str__(self):
         return self.title
-
 # -----------------------------------
 class Cover(models.Model):
     title = models.TextField(blank=True, null=True)
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to ='covers/')
 
     def __str__(self):
         return self.title
@@ -41,7 +41,7 @@ class Teacher(models.Model):
     name = models.CharField(max_length=100)
     courses = models.ForeignKey(
         Course, blank=True, null=True, related_name="teacher", on_delete=models.CASCADE)
-    picture = models.ImageField(upload_to='image')
+    picture = models.ImageField(upload_to='teachers')
     text = models.TextField()
     school = models.TextField()
     reshte = models.TextField()

@@ -10,5 +10,5 @@ urlpatterns = [
          change_password, name='change_password'),
     path('', include('rest_framework.urls')),
     path('user/info/<slug:phoneNumber>/', user_get, name='user_get'),
-    path('csrf/', GetCSRFToken.as_view()),
+    path('csrf/', GetCSRFToken.as_view(), name='csrf'),
 ]
