@@ -9,6 +9,7 @@ class User(AbstractBaseUser):
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
+    # created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     grade_obj = models.ForeignKey(
         Grade, on_delete=models.CASCADE, null=True, blank=True)
@@ -28,6 +29,7 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+            
 
     @property
     def is_staff(self):

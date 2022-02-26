@@ -17,32 +17,38 @@ class Coupon(models.Model):
 
 # ----------------------------------------------------------------------------------------------------------------------------
 class Cart(models.Model):
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='cart')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='cart')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    total_peyment = models.TextField()
+    total_peyment = models.IntegerField(default=0,blank=True, null=True)
     paid = models.BooleanField(default=False)
-    discount = models.IntegerField(blank=True,null=True,default=None)
+    # discount = models.IntegerField(blank=True,null=True,default=None)
+    coupon = models.OneToOneField(Coupon,on_delete=models.CASCADE,blank=True, null=True)
 
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
-        return f'{self.user} - {self.id}'
+        return f'{self.user} - {self.updated}'
 
     def get_total_price(self):
-        total = sum(item.price for item in self.items.all())
-        if self.discount:
-            discount_price = (self.discount/100)* total
+        total = sum(item.price for item in self.stuff.all())
+        if self.coupon:
+            discount_price = (self.coupon.discount/100)* total
+            self.total_peyment = total - discount_price
             return total - discount_price
+        self.total_peyment = total
         return total
 # ----------------------------------------------------------------------------------------------------------------------------
 class Stuff(models.Model):
      title = models.TextField()
      price = models.IntegerField(blank=True, null=True)
      id_course = models.IntegerField(blank=True, null=True)
+     picture = models.ImageField()
+     teacher = models.TextField()
      course = models.ForeignKey(Course,blank=True, null=True, on_delete=models.CASCADE)
      cart = models.ForeignKey(Cart,blank=True, null=True, on_delete=models.CASCADE,related_name='stuff')
 
      def __str__(self):
          return str(self.title)
+# ----------------------------------------------------------------------------------------------------------------------------

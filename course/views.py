@@ -4,8 +4,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from .serializers import *
 from accounts.models import User
 from rest_framework import status
-from .models import Teacher
-from .models import Cover
+from .models import *
 danial = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
@@ -20,10 +19,10 @@ def teachers_get(request):
 def giude_get(request):
     data = giudeSerializers(data=request.data)
     if data.is_valid():
-        g = giude(name=data.validated_data['name'],
+        user_giude = giude(name=data.validated_data['name'],
                   title=data.validated_data['title'],
                   phone=data.validated_data['phone'])
-        g.save()
+        user_giude.save()
         return Response({'message': 'ok created!'}, status=status.HTTP_201_CREATED)
     else:
         return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -37,9 +36,12 @@ def get_cover(request):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def course_get(request, code):
-    courses = Course.objects.get(kind_course__code=code)
-    ser_data = courseSerializers(courses, many=True)
+def course_get(request,grade,kind):
+    try:
+        course = Course.objects.filter(kind_course__code=kind,grade__code=grade)
+    except Course.DoesNotExist:
+        return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    ser_data = courseSerializers(course, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
@@ -52,6 +54,7 @@ def kind_get(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def soal_get(request):
-    soals = soal.objects.all()
+    soals = Question.objects.all()
     ser_data = soalSerializers(soals, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------

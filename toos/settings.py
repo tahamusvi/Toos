@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 
 
 INSTALLED_APPS += [
-    'cart',
+    'stuff',
     'course.apps.CourseConfig',
     'accounts.apps.AccountsConfig',
 ]

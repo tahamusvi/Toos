@@ -25,7 +25,7 @@ class KindSerializers(serializers.ModelSerializer):
 # -------------------------------------------------------------------------------------------------------------------------------
 class soalSerializers(serializers.ModelSerializer):
     class Meta:
-        model = soal
+        model = Question
         fields = ["question", "answer"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class CoverSerializers(serializers.ModelSerializer):

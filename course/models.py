@@ -3,6 +3,7 @@ from django.db import models
 
 class Grade(models.Model):
     title = models.CharField(max_length=30)
+    code = models.IntegerField()
 
     def __str__(self):
         return self.title
@@ -21,26 +22,10 @@ class Kind(models.Model):
 
     def __str__(self):
         return self.title
-# -----------------------------------
-class Course(models.Model):
-    title_persion = models.CharField(max_length=30)
-    title_en = models.CharField(max_length=30)
-    picture = models.ImageField()
-    link = models.TextField()
-    # video = models.FileField()
-    video_preview = models.FileField(blank=True, null=True)
-    kind_course = models.ForeignKey(
-        Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
-    grade = models.ForeignKey(
-        Grade, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
 
-    def __str__(self):
-        return str(self.title_persion)
-# ----------------------------------------------------------------------------------------------------------------------------
+# -----------------------------------
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
-    courses = models.ForeignKey(
-        Course, blank=True, null=True, related_name="teacher", on_delete=models.CASCADE)
     picture = models.ImageField(upload_to='teachers')
     text = models.TextField()
     school = models.TextField()
@@ -48,6 +33,28 @@ class Teacher(models.Model):
 
     def __str__(self):
         return str(self.name)
+# ----------------------------------------------------------------------------------------------------------------------------
+class Course(models.Model):
+    title_persion = models.CharField(max_length=30)
+    title_en = models.CharField(max_length=30)
+    picture = models.ImageField()
+    kind_course = models.ForeignKey(
+        Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
+    grade = models.ForeignKey(
+        Grade, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
+
+    # link = models.TextField()
+    # video_preview = models.FileField(blank=True, null=True)
+
+    def __str__(self):
+        return str(self.title_persion)
+# ----------------------------------------------------------------------------------------------------------------------------
+class Session_coruse(models.Model):
+    video = models.FileField()
+    text = models.TextField()
+    course = models.ForeignKey(
+        Course, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
 # ----------------------------------------------------------------------------------------------------------------------------
 class giude(models.Model):
     title = models.CharField(max_length=100)
@@ -57,7 +64,7 @@ class giude(models.Model):
     def __str__(self):
         return str(self.phone)
 # ----------------------------------------------------------------------------------------------------------------------------
-class soal(models.Model):
+class Question(models.Model):
     question = models.TextField()
     answer = models.TextField()
 
