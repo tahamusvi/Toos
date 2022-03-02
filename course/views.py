@@ -58,3 +58,13 @@ def soal_get(request):
     ser_data = soalSerializers(soals, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def one_course_get(request,id):
+#     try:
+#         course = Course.objects.filter(kind_course__code=kind,grade__code=grade)
+#     except Course.DoesNotExist:
+#         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+
+# -----------------------------------------------------------------------------------------------------------------------

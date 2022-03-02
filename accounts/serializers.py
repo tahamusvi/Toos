@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import User
 
 
+class LoginSerializers(serializers.ModelSerializer):
+    username = serializers.CharField()
+    # password = serializers.CharField()
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+# -------------------------------------------------------------------------------------------------------------------------------
 class UserSerializersValid(serializers.ModelSerializer):
     class Meta:
         model = User

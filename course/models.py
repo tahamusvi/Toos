@@ -37,6 +37,7 @@ class Teacher(models.Model):
 class Course(models.Model):
     title_persion = models.CharField(max_length=30)
     title_en = models.CharField(max_length=30)
+    id_course = models.IntegerField()
     picture = models.ImageField()
     kind_course = models.ForeignKey(
         Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)

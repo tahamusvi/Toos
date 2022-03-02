@@ -8,8 +8,44 @@ from course.models import Grade
 from random import randint
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import login
+import json
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
 # REACT_APP_VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
 danial = 'fdgfdhj67867sdfsf2343nh'
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login(request):
+    data = request.data
+    username = data['username']
+    password = data.get('password')
+    if username is None:
+        return JsonResponse({
+            "errors": {
+                "detail": "Please enter username"
+            }
+        }, status=400)
+    elif password is None:
+        return JsonResponse({
+            "errors": {
+                "detail": "Please enter password"
+            }
+        }, status=400)
+
+    # authentication user
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return JsonResponse({"success": "User has been logged in"})
+    return JsonResponse(
+        {"errors": "Invalid credentials"},
+        status=400,
+    )
+
+
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -83,12 +119,14 @@ def user_update(request, phoneNumber):
         user.set_password(info.validated_data['password'])
         if danialtex == danial:
             user.save()
-
-        return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
+            return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'Validet Token is NOT True!'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def user_get(request, phoneNumber):
     try:
         user = User.objects.get(phoneNumber=phoneNumber)

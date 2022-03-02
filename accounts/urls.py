@@ -1,10 +1,12 @@
 from django.urls import path, include
 from .api_views import *
 from .views import GetCSRFToken
+from .login import login_view
 
 urlpatterns = [
     path('user/create/', user_create, name='user_create'),
     path('user/update/<slug:phoneNumber>/', user_update, name='user_update'),
+    path('login/', login_view, name="api-auth-login"),
     path('user/code/again/<slug:phoneNumber>/', code_get, name='code_get'),
     path('user/change/password/<slug:phoneNumber>/',
          change_password, name='change_password'),

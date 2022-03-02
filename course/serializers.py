@@ -16,7 +16,7 @@ class courseSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ["title_persion", "title_en", "picture",
-                  "link", "video_preview", "grade"]
+                  "grade"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class KindSerializers(serializers.ModelSerializer):
     class Meta:
