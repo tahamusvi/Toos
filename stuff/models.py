@@ -31,13 +31,16 @@ class Cart(models.Model):
     def __str__(self):
         return f'{self.user} - {self.updated}'
 
+    @property
     def get_total_price(self):
         total = sum(item.price for item in self.stuff.all())
         if self.coupon:
             discount_price = (self.coupon.discount/100)* total
             self.total_peyment = total - discount_price
+            self.save()
             return total - discount_price
         self.total_peyment = total
+        self.save()
         return total
 # ----------------------------------------------------------------------------------------------------------------------------
 class Stuff(models.Model):

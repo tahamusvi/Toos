@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from .serializers import *
 from .models import User
 from rest_framework import status
+from stuff.models import Cart
 from course.models import Grade
 from random import randint
 from django.contrib.auth.hashers import check_password
@@ -118,6 +119,9 @@ def user_update(request, phoneNumber):
         user.is_active = True
         user.set_password(info.validated_data['password'])
         if danialtex == danial:
+            cart = Cart(user=user)
+            cart.save()
+            user.cart = cart
             user.save()
             return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
         else:

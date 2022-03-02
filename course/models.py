@@ -22,14 +22,21 @@ class Kind(models.Model):
 
     def __str__(self):
         return self.title
+# ----------------------------------------------------------------------------------------------------------------------------
+class News(models.Model):
+    title = models.TextField()
+    text = models.TextField()
 
-# -----------------------------------
+# ----------------------------------------------------------------------------------------------------------------------------
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='teachers')
     text = models.TextField()
     school = models.TextField()
     reshte = models.TextField()
+    #Teacher dars baraye safhe course
+    # kind_course = models.ForeignKey(
+    #     Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.name)
@@ -38,11 +45,14 @@ class Course(models.Model):
     title_persion = models.CharField(max_length=30)
     title_en = models.CharField(max_length=30)
     id_course = models.IntegerField()
+    price = models.IntegerField()
     picture = models.ImageField()
     kind_course = models.ForeignKey(
         Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     grade = models.ForeignKey(
         Grade, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
+    #Saaat
+    #tedad ghesmat
     teacher = models.ForeignKey(Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
 
     # link = models.TextField()

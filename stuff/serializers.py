@@ -7,10 +7,9 @@ class CouponSerializer(serializers.ModelSerializer):
 # -------------------------------------------------------------------------------------------------------------------------------
 class StuffSerializer(serializers.ModelSerializer):
     phoneNumber = serializers.CharField()
-    id = serializers.IntegerField()
     class Meta:
         model = Stuff
-        fields = ['price', 'title','id','phoneNumber']
+        fields = [ 'title','phoneNumber']
 # -------------------------------------------------------------------------------------------------------------------------------
 class GetTotalPrice(serializers.ModelSerializer):
 	phoneNumber = serializers.CharField()

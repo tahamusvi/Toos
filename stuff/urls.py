@@ -7,4 +7,10 @@ urlpatterns = [
     path('get_cart/<slug:phoneNumber>/',get_cart),
     path('get_total/<slug:phoneNumber>/',get_total),
     path('apply_coupon/<slug:phoneNumber>/',apply_coupon),
+    path('test/<slug:phoneNumber>/',test),
+
+
+    #Zarinpal
+    # path('zarin/request/', views.send_request, name='request'),
+    # path('zarin/verify/', views.verify , name='verify'),
 ]
