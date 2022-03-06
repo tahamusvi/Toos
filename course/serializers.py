@@ -5,7 +5,7 @@ from .models import *
 class TeacherSerializers(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ["name", 'text', 'picture', 'school', 'reshte']
+        fields = ["name", 'reshte_text', 'picture', 'school', 'kind']
 # ----------------------------------------------------------------------------------------------------------------------------
 class giudeSerializers(serializers.ModelSerializer):
     class Meta:
@@ -15,8 +15,7 @@ class giudeSerializers(serializers.ModelSerializer):
 class courseSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ["title_persion", "title_en", "picture",
-                  "grade"]
+        fields = ["title_persion", "title_en", "picture","grade"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class KindSerializers(serializers.ModelSerializer):
     class Meta:

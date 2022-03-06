@@ -15,7 +15,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 # REACT_APP_VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
-danial = 'fdgfdhj67867sdfsf2343nh'
+VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -45,8 +45,6 @@ def login(request):
         {"errors": "Invalid credentials"},
         status=400,
     )
-
-
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -59,8 +57,8 @@ def change_password(request, phoneNumber):
 
     if info.is_valid():
         user.set_password(info.validated_data['password'])
-        danialtex = info.validated_data['danial']
-        if danialtex == danial:
+        VALIDATION_CODE_FRONT = info.validated_data['VALIDATION_CODE']
+        if VALIDATION_CODE_FRONT == VALIDATION_CODE:
             user.save()
         return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
     else:
@@ -113,12 +111,12 @@ def user_update(request, phoneNumber):
         user.firstName = info.validated_data['firstName']
         user.lastName = info.validated_data['lastName']
         grade = info.validated_data['grade']
-        danialtex = info.validated_data['danial']
+        VALIDATION_CODE_FRONT = info.validated_data['VALIDATION_CODE']
         user.grade_obj = Grade.objects.get(title=grade)
         user.grade = user.grade_obj.title
         user.is_active = True
         user.set_password(info.validated_data['password'])
-        if danialtex == danial:
+        if VALIDATION_CODE_FRONT == VALIDATION_CODE:
             cart = Cart(user=user)
             cart.save()
             user.cart = cart

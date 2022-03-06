@@ -5,12 +5,21 @@ from .serializers import *
 from accounts.models import User
 from rest_framework import status
 from .models import *
-danial = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def teachers_get(request):
     teachers = Teacher.objects.all()
+    ser_data = TeacherSerializers(teachers, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def teachers_kind_get(request,pk):
+    try:
+        teachers = Teacher.objects.filter(kind__pk=pk)
+    except Teacher.DoesNotExist:
+        return Response({'error': 'this teachers does not exist'}, status=status.HTTP_404_NOT_FOUND)
     ser_data = TeacherSerializers(teachers, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
@@ -34,11 +43,21 @@ def get_cover(request):
     data = CoverSerializers(covers, many=True)
     return Response(data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def course_get(request,grade,kind):
+#     try:
+#         course = Course.objects.filter(kind__pk=kind,grade__pk=grade)
+#     except Course.DoesNotExist:
+#         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
+#     ser_data = courseSerializers(course, many=True)
+#     return Response(ser_data.data, status=status.HTTP_200_OK)
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def course_get(request,grade,kind):
+def course_get(request,kind):
     try:
-        course = Course.objects.filter(kind_course__code=kind,grade__code=grade)
+        course = Course.objects.filter(kind__code=kind)
     except Course.DoesNotExist:
         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
     ser_data = courseSerializers(course, many=True)
@@ -60,9 +79,9 @@ def soal_get(request):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def one_course_get(request,id):
+def one_course_get(request,pk):
     try:
-        course = Course.objects.get(id_course = id)
+        course = Course.objects.get(pk = pk)
     except Course.DoesNotExist:
         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
     ser_data = courseSerializers(course)
@@ -70,3 +89,16 @@ def one_course_get(request,id):
 
 
 # -----------------------------------------------------------------------------------------------------------------------
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def course_sagesst(request,grade,kind):
+#     try:
+#         course = Course.objects.filter(kind_course__pk=kind,grade__pk=grade)
+#     except Course.DoesNotExist:
+#         return Response({'error': 'this courses does not exist'}, status=status.HTTP_404_NOT_FOUND)
+#     ser_data = courseSerializers(course, many=True)
+#     return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def 
