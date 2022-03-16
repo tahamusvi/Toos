@@ -101,7 +101,7 @@ def session_get(request,code):
         course = Course.objects.get(code = code)
     except Course.DoesNotExist:
         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    
+
     sessions = course.sessions.all()
     data = SessionSerializer(sessions,many=True)
     return Response(data.data, status=status.HTTP_200_OK)
@@ -119,4 +119,4 @@ def session_get(request,code):
 # -----------------------------------------------------------------------------------------------------------------------
 # @api_view(['GET'])
 # @permission_classes([AllowAny])
-# def 
+# def

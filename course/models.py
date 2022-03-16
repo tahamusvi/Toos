@@ -23,18 +23,18 @@ class Package(models.Model):
     code = models.IntegerField(unique=True)
     def __str__(self):
         return self.title
-    
+
     def path(self):
         title = self.title
         temp = ""
-        
+
         for i in title:
             if(i==' '):
                temp += '-'
             else:
-                temp += i 
-                
-        return f'پکیج-های-آموزشی-{temp}' 
+                temp += i
+
+        return f'پکیج-های-آموزشی-{temp}'
     def show_title(self):
         return f'پکیج های {self.title}'
 # -----------------------------------
@@ -44,8 +44,8 @@ class Kind(models.Model):
     code = models.IntegerField(unique=True)
     package = models.ForeignKey(
         Package, blank=True, null=True, related_name="kind", on_delete=models.CASCADE)
-    
-    
+
+
     def package_title(self):
         return self.package.show_title()
 
@@ -117,23 +117,23 @@ class Course(models.Model):
 
     def count_session(self):
         return self.sessions.all().count()
-    
+
     def teacher_name(self):
         return str(self.teacher.name)
-    
+
     def path(self):
         title = self.title_persion
         temp = ""
-        
+
         for i in title:
             if(i==' '):
                temp += '-'
             else:
-                temp += i 
-                
+                temp += i
+
         title1 = self.kind.package.path()
         return  f'دوره-{temp}' + '/' + title1
-    
+
     def __str__(self):
         return str(self.title_persion)
 # ----------------------------------------------------------------------------------------------------------------------------

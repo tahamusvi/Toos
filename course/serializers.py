@@ -32,7 +32,7 @@ class CoverSerializers(serializers.ModelSerializer):
         model = Cover
         fields = ["picture", "title"]
 # -------------------------------------------------------------------------------------------------------------------------------
-class SessionSerializer(serializers.ModelSerializer):  
+class SessionSerializer(serializers.ModelSerializer):
    class Meta:
       model = Session_coruse
       fields = ['title','text']
