@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'stuff',
+    'utils',
     'course.apps.CourseConfig',
     'accounts.apps.AccountsConfig',
 ]
