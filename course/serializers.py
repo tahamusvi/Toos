@@ -7,11 +7,6 @@ class TeacherSerializers(serializers.ModelSerializer):
         model = Teacher
         fields = ["name", 'reshte_text', 'picture', 'school', 'kind']
 # ----------------------------------------------------------------------------------------------------------------------------
-class giudeSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = giude
-        fields = ["name", "phone", "title"]
-# -------------------------------------------------------------------------------------------------------------------------------
 class courseSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
@@ -21,16 +16,6 @@ class KindSerializers(serializers.ModelSerializer):
     class Meta:
         model = Kind
         fields = ["title", "picture","code","package_title"]
-# -------------------------------------------------------------------------------------------------------------------------------
-class soalSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Question
-        fields = ["question", "answer"]
-# -------------------------------------------------------------------------------------------------------------------------------
-class CoverSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Cover
-        fields = ["picture", "title"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class SessionSerializer(serializers.ModelSerializer):
    class Meta:

@@ -2,10 +2,6 @@ from django.contrib import admin
 from .models import *
 
 admin.site.register(Teacher)
-admin.site.register(giude)
-
-admin.site.register(Question)
-admin.site.register(Cover)
 
 class CoruseAdmin(admin.ModelAdmin):
 	def course_sessions_name(self,obj):

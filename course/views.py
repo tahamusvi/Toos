@@ -23,26 +23,6 @@ def teachers_kind_get(request,pk):
     ser_data = TeacherSerializers(teachers, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def giude_get(request):
-    data = giudeSerializers(data=request.data)
-    if data.is_valid():
-        user_giude = giude(name=data.validated_data['name'],
-                  title=data.validated_data['title'],
-                  phone=data.validated_data['phone'])
-        user_giude.save()
-        return Response({'message': 'ok created!'}, status=status.HTTP_201_CREATED)
-    else:
-        return Response(data.errors, status=status.HTTP_400_BAD_REQUEST)
-# -----------------------------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def get_cover(request):
-    covers = Cover.objects.all()
-    data = CoverSerializers(covers, many=True)
-    return Response(data.data, status=status.HTTP_200_OK)
-# -----------------------------------------------------------------------------------------------------------------------
 # @api_view(['GET'])
 # @permission_classes([AllowAny])
 # def course_get(request,kind):
@@ -75,13 +55,6 @@ def kind_get(request,package_code):
 def Package_get(request):
     packages = Package.objects.all().order_by('code')
     ser_data = PackageSerializers(packages, many=True)
-    return Response(ser_data.data, status=status.HTTP_200_OK)
-# -----------------------------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def soal_get(request):
-    soals = Question.objects.all()
-    ser_data = soalSerializers(soals, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
