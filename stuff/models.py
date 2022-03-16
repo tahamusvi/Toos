@@ -30,10 +30,10 @@ class Cart(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.updated}'
-
-    @property
+    
     def get_total_price(self):
         total = sum(item.price for item in self.stuff.all())
+        print(total)
         if self.coupon:
             discount_price = (self.coupon.discount/100)* total
             self.total_peyment = total - discount_price
@@ -46,7 +46,7 @@ class Cart(models.Model):
 class Stuff(models.Model):
      title = models.TextField()
      price = models.IntegerField(blank=True, null=True)
-     id_course = models.IntegerField(blank=True, null=True)
+     code = models.IntegerField(blank=True, null=True)
      picture = models.ImageField()
      teacher = models.TextField()
      course = models.ForeignKey(Course,blank=True, null=True, on_delete=models.CASCADE)

@@ -1,3 +1,4 @@
+from dataclasses import field
 from rest_framework import serializers
 from .models import *
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -6,10 +7,9 @@ class CouponSerializer(serializers.ModelSerializer):
 
 # -------------------------------------------------------------------------------------------------------------------------------
 class StuffSerializer(serializers.ModelSerializer):
-    phoneNumber = serializers.CharField()
     class Meta:
         model = Stuff
-        fields = [ 'title','phoneNumber']
+        fields = []
 # -------------------------------------------------------------------------------------------------------------------------------
 class GetTotalPrice(serializers.ModelSerializer):
 	phoneNumber = serializers.CharField()
@@ -26,10 +26,11 @@ class Courseserializer(serializers.ModelSerializer):
 class GetCartPrice(serializers.ModelSerializer):
 	class Meta:
 		model = Stuff
-		fields = ['title','price','picture','teacher']	
+		fields = ['title','price','picture','teacher','code']	
 # -------------------------------------------------------------------------------------------------------------------------------
 class ApplyCouponSerializer(serializers.ModelSerializer):
 	coupon_text = serializers.CharField()
 	class Meta:
 		model = Cart
 		fields = ['coupon_text',]	
+# -------------------------------------------------------------------------------------------------------------------------------

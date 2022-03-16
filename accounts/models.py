@@ -14,8 +14,9 @@ class User(AbstractBaseUser):
     grade_obj = models.ForeignKey(
         Grade, on_delete=models.CASCADE, null=True, blank=True)
     grade = models.CharField(max_length=100, null=True, blank=True)
+    
+    code = models.IntegerField(blank=True,null=True)
 
-    code = models.IntegerField(null=True, blank=True)
 
     REQUIRED_FIELDS = ['nationalCode']
     USERNAME_FIELD = 'phoneNumber'

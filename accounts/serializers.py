@@ -20,18 +20,18 @@ class CodeAgainSerializersValid(serializers.ModelSerializer):
         fields = []
 # -------------------------------------------------------------------------------------------------------------------------------
 class ChangePasswordSerializersValid(serializers.ModelSerializer):
-    danial = serializers.CharField()
+    VALIDATION_CODE = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ['password', 'danial']
+        fields = ['password', 'VALIDATION_CODE']
 # -------------------------------------------------------------------------------------------------------------------------------
 class UserSerializersUpdate(serializers.ModelSerializer):
-    danial = serializers.CharField()
+    VALIDATION_CODE = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ['firstName', 'lastName', 'password', 'grade', 'danial']
+        fields = ['firstName', 'lastName', 'password', 'grade', 'VALIDATION_CODE']
 # -------------------------------------------------------------------------------------------------------------------------------
 class UserSerializersInfo(serializers.ModelSerializer):
     class Meta:
@@ -40,7 +40,7 @@ class UserSerializersInfo(serializers.ModelSerializer):
                   'nationalCode', 'phoneNumber', 'is_admin', 'is_active']
 # -------------------------------------------------------------------------------------------------------------------------------
 class UserSerializerslogin(serializers.ModelSerializer):
-    danial = serializers.CharField()
+    VALIDATION_CODE = serializers.CharField()
     class Meta:
         model = User
-        fields = ['password', 'danial']
+        fields = ['password', 'VALIDATION_CODE']
