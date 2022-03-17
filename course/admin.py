@@ -13,6 +13,7 @@ class KindAdmin(admin.ModelAdmin):
 class GradeAdmin(admin.ModelAdmin):
    list_display = ('title','pk')
 
+admin.site.register(OnlineClass)
 admin.site.register(Package)
 admin.site.register(Course,CoruseAdmin)
 admin.site.register(Session_coruse)

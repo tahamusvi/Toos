@@ -15,6 +15,14 @@ def teachers_get(request):
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def onlineClass_get(request):
+    #add filter
+    onlineClass = OnlineClass.objects.all()
+    ser_data = OnlineClassSerializers(onlineClass, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def teachers_kind_get(request,pk):
     try:
         teachers = Teacher.objects.filter(kind__pk=pk)

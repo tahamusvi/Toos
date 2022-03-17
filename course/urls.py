@@ -9,4 +9,5 @@ urlpatterns = [
     path('course/<slug:pk>/',one_course_get,name='one_course_get'),
     path('teachers/<slug:pk>/', teachers_kind_get, name='teachers_kind_get'),
     path('get_session/<slug:code>/', session_get),
+    path('onlineClass_get/',onlineClass_get),
 ]

@@ -56,7 +56,16 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+# ----------------------------------------------------------------------------------------------------------------------------
+class OnlineClass(models.Model):
+    title = models.CharField(max_length=100,blank=True, null=True)
+    link = models.TextField()
+    #Filter for Users
 
+
+
+    def __str__(self):
+        return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
