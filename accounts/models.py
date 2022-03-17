@@ -14,9 +14,10 @@ class User(AbstractBaseUser):
     grade_obj = models.ForeignKey(
         Grade, on_delete=models.CASCADE, null=True, blank=True)
     grade = models.CharField(max_length=100, null=True, blank=True)
-    
+
     code = models.IntegerField(blank=True,null=True)
 
+    courses = models.ManyToManyField(Course ,blank=True,related_name="user")
 
     REQUIRED_FIELDS = ['nationalCode']
     USERNAME_FIELD = 'phoneNumber'
@@ -30,7 +31,7 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-            
+
 
     @property
     def is_staff(self):

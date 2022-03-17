@@ -30,15 +30,20 @@ def add_stuff(request,phoneNumber,code):
         course = Course.objects.get(code = code)
     except Course.DoesNotExist:
         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
     try:
         user = User.objects.get(phoneNumber=phoneNumber)
     except User.DoesNotExist:
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
+
+    if( user.cart.stuff.filter(course = course)) or (user.courses.filter(user = user)):
+        return Response({'error': 'this course has buy'}, status=status.HTTP_400_BAD_REQUEST)
+
     if user.cart is None:
         new_cart = Cart(user=user)
         user.cart = new_cart
-        
+
 
 
     stuff = Stuff(title=course.title_persion,
@@ -48,7 +53,7 @@ def add_stuff(request,phoneNumber,code):
     course = course,
     code = course.code,
     )
-    
+
     stuff.cart = user.cart
     # stuff.cart.get_total_price()
     stuff.save()
@@ -86,8 +91,8 @@ def get_total(request,phoneNumber):
         user = User.objects.get(phoneNumber=phoneNumber)
     except User.DoesNotExist:
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    
-    user.cart.save() 
+
+    user.cart.save()
     total = user.cart.get_total_price()
     count = user.cart.stuff.all().count()
     return Response({'total':total,'count':count}, status=status.HTTP_200_OK)
@@ -99,10 +104,10 @@ def delete_stuff(request,phoneNumber,code):
         user = User.objects.get(phoneNumber=phoneNumber)
     except User.DoesNotExist:
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    
+
     stuff_del = user.cart.stuff.filter(code=code)
     stuff_del.delete()
-    
+
     return Response({'message': 'ok is deleted'}, status=status.HTTP_204_NO_CONTENT)
 # ----------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
@@ -149,10 +154,10 @@ def apply_coupon(request,phoneNumber,coupon):
 #         user = User.objects.get(phoneNumber=phoneNumber)
 #     except User.DoesNotExist:
 #         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    
-#     global amount 
+
+#     global amount
 #     amount = user.cart.get_total_price()
-    
+
 #     result = client.service.PaymentRequest(MERCHANT, amount, description, email, user.phoneNumber, CallbackURL)
 #     if result.Status == 100:
 #         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
