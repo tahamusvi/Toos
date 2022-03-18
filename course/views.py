@@ -99,7 +99,19 @@ def is_buy(request,phoneNumber,code):
     if user.courses.filter(code = code):
         return Response({'Message':'user has bayed this course'}, status=status.HTTP_200_OK)
     return Response({'Message':'user hasnt bayed this course'}, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_courses_online(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
+    courses = Course.objects.filter(user = user,is_online = True).order_by('price')
+
+    ser_data = courseSerializers(courses, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
