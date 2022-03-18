@@ -90,6 +90,15 @@ def Suggested_course(request,phoneNumber):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def fresh_course(request):
+
+    fresh_courses = Course.objects.filter(is_new = True).order_by('created')
+
+    ser_data = courseSerializers(fresh_courses, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def session_get(request,code):
     try:
         course = Course.objects.get(code = code)

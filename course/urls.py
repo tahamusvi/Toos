@@ -10,5 +10,6 @@ urlpatterns = [
     path('teachers/<slug:pk>/', teachers_kind_get, name='teachers_kind_get'),
     path('get_session/<slug:code>/', session_get),
     path('onlineClass_get/',onlineClass_get),
-    path('suggested_course/<slug:phoneNumber>/',Suggested_course,name='Suggested_course')
+    path('suggested_course/<slug:phoneNumber>/',Suggested_course,name='Suggested_course'),
+    path('fresh_course/',fresh_course,name='fresh_course'),
 ]

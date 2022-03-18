@@ -102,6 +102,7 @@ class Course(models.Model):
     teacher = models.ForeignKey(
         Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     code = models.IntegerField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
     Text = models.TextField()
     video_preview = models.FileField(blank=True, null=True)
     sessions = models.ManyToManyField(Session_coruse, related_name="course")
