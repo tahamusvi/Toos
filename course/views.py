@@ -77,6 +77,19 @@ def one_course_get(request,pk):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def Suggested_course(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    suggested_course = Course.objects.filter(grade = user.grade_obj).order_by('price')
+
+    ser_data = courseSerializers(suggested_course, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def session_get(request,code):
     try:
         course = Course.objects.get(code = code)

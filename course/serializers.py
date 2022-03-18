@@ -15,7 +15,7 @@ class OnlineClassSerializers(serializers.ModelSerializer):
 class courseSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ["title_persion", "title_en", "picture","grade","code","price","teacher_name","path","count_session","time"]
+        fields = ["title_persion", "title_en", "picture","grade","code","price","teacher_name","path","count_session","time","count_user"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class KindSerializers(serializers.ModelSerializer):
     class Meta:

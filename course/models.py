@@ -108,6 +108,9 @@ class Course(models.Model):
     is_new = models.BooleanField(default=True)
 
 
+    def count_user(self):
+        return self.user.all().count()
+
     def count_session(self):
         return self.sessions.all().count()
 
