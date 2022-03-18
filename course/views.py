@@ -90,6 +90,32 @@ def Suggested_course(request,phoneNumber):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def is_buy(request,phoneNumber,code):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if user.courses.filter(code = code):
+        return Response({'Message':'user has bayed this course'}, status=status.HTTP_200_OK)
+    return Response({'Message':'user hasnt bayed this course'}, status=status.HTTP_200_OK)
+
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_courses(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    courses = Course.objects.filter(user = user).order_by('price')
+
+    ser_data = courseSerializers(courses, many=True)
+    return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def fresh_course(request):
 
     fresh_courses = Course.objects.filter(is_new = True).order_by('created')
