@@ -5,6 +5,13 @@ from rest_framework import status
 from accounts.models import User
 from .serializers import *
 from .models import *
+from .timeIr import get_date
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_date_online(request):
+    text = get_date()
+    return Response({"message":text}, status=status.HTTP_200_OK)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
