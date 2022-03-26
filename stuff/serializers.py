@@ -4,7 +4,6 @@ from .models import *
 # -------------------------------------------------------------------------------------------------------------------------------
 class CouponSerializer(serializers.ModelSerializer):
     Code = serializers.CharField()
-
 # -------------------------------------------------------------------------------------------------------------------------------
 class StuffSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,13 +14,11 @@ class GetTotalPrice(serializers.ModelSerializer):
 	phoneNumber = serializers.CharField()
 	class Meta:
 		fields = ['phoneNumber',]	
-
 # -------------------------------------------------------------------------------------------------------------------------------
 class Courseserializer(serializers.ModelSerializer):
 	class Meta:
 		model = Course
 		fields = ['title_en',]	
-
 # -------------------------------------------------------------------------------------------------------------------------------
 class GetCartPrice(serializers.ModelSerializer):
 	class Meta:

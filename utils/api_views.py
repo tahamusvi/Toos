@@ -6,11 +6,6 @@ from accounts.models import User
 from .serializers import *
 from .models import *
 # -------------------------------------------------------------------------------------------------------------------------------
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def date_get(request):
-#     return Response(, status=status.HTTP_200_OK)
-# -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def get_cover(request):
@@ -51,3 +46,4 @@ def soal_get(request):
     soals = Question.objects.all()
     ser_data = soalSerializers(soals, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
+# -----------------------------------------------------------------------------------------------------------------------

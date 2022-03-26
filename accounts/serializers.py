@@ -1,10 +1,9 @@
 from rest_framework import serializers
 from .models import User
 
-
+# -------------------------------------------------------------------------------------------------------------------------------
 class LoginSerializers(serializers.ModelSerializer):
     username = serializers.CharField()
-    # password = serializers.CharField()
     class Meta:
         model = User
         fields = ['username', 'password']
@@ -21,10 +20,11 @@ class CodeAgainSerializersValid(serializers.ModelSerializer):
 # -------------------------------------------------------------------------------------------------------------------------------
 class ChangePasswordSerializersValid(serializers.ModelSerializer):
     VALIDATION_CODE = serializers.CharField()
+    old_password = serializers.CharField()
 
     class Meta:
         model = User
-        fields = ['password', 'VALIDATION_CODE']
+        fields = ['old_password','password', 'VALIDATION_CODE']
 # -------------------------------------------------------------------------------------------------------------------------------
 class UserSerializersUpdate(serializers.ModelSerializer):
     VALIDATION_CODE = serializers.CharField()
@@ -44,3 +44,4 @@ class UserSerializerslogin(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['password', 'VALIDATION_CODE']
+# -------------------------------------------------------------------------------------------------------------------------------

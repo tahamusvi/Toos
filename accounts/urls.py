@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .api_views import *
-from .views import GetCSRFToken
-from .login import login_view
+from .views import *
+
 
 urlpatterns = [
     path('user/create/', user_create, name='user_create'),
@@ -12,5 +12,5 @@ urlpatterns = [
          change_password, name='change_password'),
     path('', include('rest_framework.urls')),
     path('user/info/<slug:phoneNumber>/', user_get, name='user_get'),
-    path('csrf/', GetCSRFToken.as_view(), name='csrf'),
+    path('csrf/', get_csrf_token.as_view(), name='csrf'),
 ]

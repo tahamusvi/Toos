@@ -5,8 +5,6 @@ from .serializers import *
 from accounts.models import User
 from rest_framework import status
 from course.models import Grade
-# REACT_APP_VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
-danial = 'fdgfdhj67867sdfsf2343nh'
 
 # ----------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])

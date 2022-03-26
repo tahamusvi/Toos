@@ -5,12 +5,12 @@ from .models import *
 class TeacherSerializers(serializers.ModelSerializer):
     class Meta:
         model = Teacher
-        fields = ["name", 'reshte_text', 'picture', 'school', 'kind']
+        fields = ["name", "reshte_text", "picture", "school", "kind"]
 # ----------------------------------------------------------------------------------------------------------------------------
 class OnlineClassSerializers(serializers.ModelSerializer):
     class Meta:
         model = OnlineClass
-        fields = ["title", 'link']
+        fields = ["title", "link"]
 # ----------------------------------------------------------------------------------------------------------------------------
 class courseSerializers(serializers.ModelSerializer):
     class Meta:
@@ -25,10 +25,10 @@ class KindSerializers(serializers.ModelSerializer):
 class SessionSerializer(serializers.ModelSerializer):
    class Meta:
       model = Session_coruse
-      fields = ['title','text']
+      fields = ["title","text"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class PackageSerializers(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ["show_title", "picture","code","path"]
-        ordering = ('code',)
+        ordering = ("code",)

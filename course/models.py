@@ -4,7 +4,6 @@ from django.db import models
 class Grade(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='grade/')
-    # code = models.IntegerField()
 
     def __str__(self):
         return self.title
@@ -12,7 +11,6 @@ class Grade(models.Model):
 class Package(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='package/')
-    # path = models.CharField(max_length=100,blank=True, null=True)
     code = models.IntegerField(unique=True)
     def __str__(self):
         return self.title
@@ -57,9 +55,13 @@ class News(models.Model):
     def __str__(self):
         return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
+# class session_online_class(models.Model):
+#     text = models.CharField(max_length=100,blank=True, null=True)    
+# ----------------------------------------------------------------------------------------------------------------------------
 class OnlineClass(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
     link = models.TextField()
+
     #Filter for Users
 
 
@@ -90,13 +92,11 @@ from datetime import datetime
 class Course(models.Model):
     title_persion = models.CharField(max_length=30)
     title_en = models.CharField(max_length=30)
-    # price = models.IntegerField()
     picture = models.ImageField()
     kind = models.ForeignKey(
         Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     grade = models.ForeignKey(
         Grade, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
-    # Saaat
     time = models.TimeField(blank=True, default=datetime.now)
     price = models.IntegerField()
     teacher = models.ForeignKey(

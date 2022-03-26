@@ -6,6 +6,23 @@ from accounts.models import User
 from rest_framework import status
 from .models import *
 # -------------------------------------------------------------------------------------------------------------------------------
+"""
+api's in api_views.py :
+
+1-teachers_get --> get info teacher for frist-page
+2-onlineClass_get  --> get link online class
+3-teachers_kind_get --> get info teacher for a kind
+4-course_get --> get one courses
+5-kind_get --> kinds are Grouping of courses 
+6-Package_get --> package ar grouping of kinds
+7-one_course_get --> return course information
+8-Suggested_course --> show some course Due to the user grade and kinds
+9-is_buy --> check user buy this course or not
+10-user_courses --> get corses that user has buy
+11-fresh_course --> get new courses 
+12-session_get --> get one course sessions 
+"""
+# -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def teachers_get(request):
@@ -31,16 +48,6 @@ def teachers_kind_get(request,pk):
     ser_data = TeacherSerializers(teachers, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def course_get(request,kind):
-#     try:
-#         course = Course.objects.filter(kind__code=kind)
-#     except Course.DoesNotExist:
-#         return Response({'error': 'this course does not exist'}, status=status.HTTP_404_NOT_FOUND)
-#     ser_data = courseSerializers(course, many=True)
-#     return Response(ser_data.data, status=status.HTTP_200_OK)
-# -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def course_get(request,kind):
@@ -60,7 +67,7 @@ def kind_get(request,package_code):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def Package_get(request):
+def package_get(request):
     packages = Package.objects.all().order_by('code')
     ser_data = PackageSerializers(packages, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
@@ -77,7 +84,7 @@ def one_course_get(request,pk):
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def Suggested_course(request,phoneNumber):
+def suggested_course(request,phoneNumber):
     try:
         user = User.objects.get(phoneNumber=phoneNumber)
     except User.DoesNotExist:
@@ -129,9 +136,7 @@ def user_courses(request,phoneNumber):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def fresh_course(request):
-
     fresh_courses = Course.objects.filter(is_new = True).order_by('created')
-
     ser_data = courseSerializers(fresh_courses, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
@@ -148,16 +153,3 @@ def session_get(request,code):
     return Response(data.data, status=status.HTTP_200_OK)
 
 # -----------------------------------------------------------------------------------------------------------------------
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def course_sagesst(request,grade,kind):
-#     try:
-#         course = Course.objects.filter(kind_course__pk=kind,grade__pk=grade)
-#     except Course.DoesNotExist:
-#         return Response({'error': 'this courses does not exist'}, status=status.HTTP_404_NOT_FOUND)
-#     ser_data = courseSerializers(course, many=True)
-#     return Response(ser_data.data, status=status.HTTP_200_OK)
-# -----------------------------------------------------------------------------------------------------------------------
-# @api_view(['GET'])
-# @permission_classes([AllowAny])
-# def

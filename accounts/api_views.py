@@ -8,43 +8,30 @@ from stuff.models import Cart
 from course.models import Grade
 from random import randint
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth import login
-import json
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-# REACT_APP_VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
 VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
 # -------------------------------------------------------------------------------------------------------------------------------
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login(request):
-    data = request.data
-    username = data['username']
-    password = data.get('password')
-    if username is None:
-        return JsonResponse({
-            "errors": {
-                "detail": "Please enter username"
-            }
-        }, status=400)
-    elif password is None:
-        return JsonResponse({
-            "errors": {
-                "detail": "Please enter password"
-            }
-        }, status=400)
+"""
+api's in api_views.py :
 
-    # authentication user
-    user = authenticate(username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return JsonResponse({"success": "User has been logged in"})
-    return JsonResponse(
-        {"errors": "Invalid credentials"},
-        status=400,
-    )
+1-change_password --> change user password  
+2-user_create  --> create one account with phoneNumber & National Code
+3-code_get --> get code for Account validation
+4-user_update --> fill other information the user
+5-user_get --> get info user
+
+api's in login.py :
+1-login --> login user
+
+api's in view.py :
+1-login --> login user
+2- GetCSRFToken --> get crrf token for login
+3-delete_user --> delete deactive account
+
+"""
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -56,11 +43,12 @@ def change_password(request, phoneNumber):
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     if info.is_valid():
-        user.set_password(info.validated_data['password'])
-        VALIDATION_CODE_FRONT = info.validated_data['VALIDATION_CODE']
-        if VALIDATION_CODE_FRONT == VALIDATION_CODE:
-            user.save()
-        return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
+        if user.check_password(info.validated_data['old_password']):
+            user.set_password(info.validated_data['password'])
+            VALIDATION_CODE_FRONT = info.validated_data['VALIDATION_CODE']
+            if VALIDATION_CODE_FRONT == VALIDATION_CODE:
+                user.save()
+                return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
@@ -136,3 +124,4 @@ def user_get(request, phoneNumber):
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
     ser_data = UserSerializersInfo(user)
     return Response(ser_data.data, status=status.HTTP_200_OK)
+# -------------------------------------------------------------------------------------------------------------------------------

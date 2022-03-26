@@ -22,7 +22,6 @@ class Cart(models.Model):
     updated = models.DateTimeField(auto_now=True)
     total_peyment = models.IntegerField(default=0,blank=True, null=True)
     paid = models.BooleanField(default=False)
-    # discount = models.IntegerField(blank=True,null=True,default=None)
     coupon = models.OneToOneField(Coupon,on_delete=models.CASCADE,blank=True, null=True)
 
     class Meta:
