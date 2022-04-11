@@ -1,0 +1,1 @@
+https://stackoverflow.com/questions/23687643/how-can-i-use-sessionauthentication-to-make-a-login-rest-api-with-django-rest-fr
