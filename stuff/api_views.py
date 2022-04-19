@@ -67,6 +67,24 @@ def test(request,phoneNumber):
     return Response({"message":user.cart.get_total_price()}, status=status.HTTP_200_OK)
 
 # ----------------------------------------------------------------------------------------------------------------------------
+# @api_view(['GET'])
+# @permission_classes([AllowAny])
+# def after_buying(request,phoneNumber):
+#     try:
+#         user = User.objects.get(phoneNumber=phoneNumber)
+#     except User.DoesNotExist:
+#         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+#
+#
+#
+#
+#
+#     data = GetCartPrice(stuff, many=True)
+#
+#     return HttpResponse(f"Error code: {stuff},")
+#     # return Response(data.data, status=status.HTTP_200_OK)
+
+# ----------------------------------------------------------------------------------------------------------------------------
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -192,11 +210,12 @@ def send_request(request,phoneNumber):
 
     # return HttpResponse(f"auth : {req.json()}")
     if len(req.json()['errors']) == 0:
-        return redirect(ZP_API_STARTPAY.format(authority=authority))
+        return HttpResponse(f"{ZP_API_STARTPAY.format(authority=authority)}")
     else:
         e_code = req.json()['errors']['code']
         e_message = req.json()['errors']['message']
         return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
+
 
 
 def verify(request):
@@ -218,8 +237,17 @@ def verify(request):
         if len(req.json()['errors']) == 0:
             t_status = req.json()['data']['code']
             if t_status == 100:
-                user.courses.add(user.cart.stuff.all())
-                user.cart.stuff.delete()
+
+                stuffs = user.cart.stuff.all()
+                for stuff in stuffs :
+                    user.courses.add(stuff.course)
+
+                user.cart.delete()
+                cart = Cart(user=user)
+                cart.save()
+                user.cart = cart
+                user.save()
+
                 return HttpResponse('Transaction success.\nRefID: ' + str(
                     req.json()['data']['ref_id']
                 ))

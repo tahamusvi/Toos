@@ -12,6 +12,7 @@ urlpatterns = [
     path('stuff/count/<slug:phoneNumber>/',count_stuff),
 
 
+
     #Zarinpal
     path('zarin/request/<slug:phoneNumber>/', send_request, name='request'),
     path('zarin/verify/', verify , name='verify'),

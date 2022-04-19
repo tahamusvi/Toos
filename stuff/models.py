@@ -27,10 +27,10 @@ class Cart(models.Model):
     class Meta:
         ordering = ('-created',)
 
-    
+
     def get_count_stuff(self):
         return self.stuff.all().count()
-    
+
     def __str__(self):
         return f'{self.user} - {self.updated}'
 
@@ -56,4 +56,13 @@ class Stuff(models.Model):
 
      def __str__(self):
          return str(self.title)
+# ----------------------------------------------------------------------------------------------------------------------------
+class Receipt(models.Model):
+    text = models.TextField()
+    code = models.IntegerField(blank=True, null=True,unique=True)
+    course = models.ForeignKey(Course,blank=True, null=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user}-{self.code}"
 # ----------------------------------------------------------------------------------------------------------------------------
