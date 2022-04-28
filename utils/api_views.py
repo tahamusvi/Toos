@@ -9,16 +9,16 @@ from .timeIr import get_date
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_date_online(request):
-    text = get_date()
-    return Response({"message":text}, status=status.HTTP_200_OK)
-# -------------------------------------------------------------------------------------------------------------------------------
-@api_view(['GET'])
-@permission_classes([AllowAny])
 def get_cover(request):
     covers = Cover.objects.all()
     data = CoverSerializers(covers, many=True)
     return Response(data.data, status=status.HTTP_200_OK)
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_date_my(request):
+    date = get_date()
+    return Response(date, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])

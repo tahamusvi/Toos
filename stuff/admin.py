@@ -9,3 +9,4 @@ class CartAdmin(admin.ModelAdmin):
 admin.site.register(Cart,CartAdmin)
 admin.site.register(Stuff)
 admin.site.register(Coupon)
+admin.site.register(Receipt)

@@ -51,8 +51,8 @@ def get_date():
             else:
                 left += (11-m) * 30 + 29 + (30-d)
     #----------------------------------------------------------------------------------------------------------------
-    left_days = left
-    left_week = (left // 7)
+    left_days = left % 365
+    left_week = (left // 7) % 52
     date = {
     'today' : varShowTodayFullCar,
     'day' : left_days,

@@ -25,10 +25,10 @@ class KindSerializers(serializers.ModelSerializer):
 class SessionSerializer(serializers.ModelSerializer):
    class Meta:
       model = Session_coruse
-      fields = ["title","text"]
+      fields = ["title","text","link",'time']
 # -------------------------------------------------------------------------------------------------------------------------------
 class PackageSerializers(serializers.ModelSerializer):
     class Meta:
         model = Package
-        fields = ["show_title", "picture","code","path"]
+        fields = ["show_title", "picture","code","path","icon"]
         ordering = ("code",)

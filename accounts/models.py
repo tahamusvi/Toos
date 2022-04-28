@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
 from .managers import *
 from course.models import *
+from stuff.models import Receipt
 # ----------------------------------------------------------------------------------------------------------------------------
 class User(AbstractBaseUser):
     phoneNumber = models.CharField(unique=True, max_length=11)
@@ -18,6 +19,7 @@ class User(AbstractBaseUser):
     code = models.IntegerField(blank=True,null=True)
 
     courses = models.ManyToManyField(Course ,blank=True,related_name="user")
+    receipt = models.ManyToManyField(Receipt ,blank=True,related_name="user")
 
     REQUIRED_FIELDS = ['nationalCode']
     USERNAME_FIELD = 'phoneNumber'

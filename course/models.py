@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Grade(models.Model):
@@ -10,6 +11,7 @@ class Grade(models.Model):
 # -----------------------------------
 class Package(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
+    icon = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='package/')
     code = models.IntegerField(unique=True)
     def __str__(self):
@@ -55,8 +57,7 @@ class News(models.Model):
     def __str__(self):
         return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
-# class session_online_class(models.Model):
-#     text = models.CharField(max_length=100,blank=True, null=True)    
+# class session
 # ----------------------------------------------------------------------------------------------------------------------------
 class OnlineClass(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
@@ -83,21 +84,24 @@ class Teacher(models.Model):
 # ----------------------------------------------------------------------------------------------------------------------------
 class Session_coruse(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
-    text = models.TextField()
-    video = models.FileField()
+    text = models.TextField(blank=True, null=True)
+    link = models.CharField(max_length=300,blank=True, null=True)
+    time = models.TimeField(blank=True, default=datetime.now)
+    video = models.FileField(blank=True, null=True)
     def __str__(self):
         return str(self.title)
 # ----------------------------------------------------------------------------------------------------------------------------
-from datetime import datetime
 class Course(models.Model):
     title_persion = models.CharField(max_length=30)
-    title_en = models.CharField(max_length=30)
+    title_en = models.CharField(max_length=30,blank=True, null=True)
     picture = models.ImageField()
     kind = models.ForeignKey(
         Kind, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     grade = models.ForeignKey(
         Grade, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
-    time = models.TimeField(blank=True, default=datetime.now)
+    # time = models.TimeField(blank=True, default=datetime.now)
+    # time = models.DateTimeField(blank=True, default=datetime.now)
+    time_1 = models.CharField(max_length=30)
     price = models.IntegerField()
     teacher = models.ForeignKey(
         Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
@@ -110,6 +114,9 @@ class Course(models.Model):
     is_new = models.BooleanField(default=True)
 
 
+    def time(self):
+        temp = self.time_1[0]+self.time_1[1] + ':' + self.time_1[2]+self.time_1[3]+ ':' + self.time_1[4]+self.time_1[5]
+        return temp
     def count_user(self):
         return self.user.all().count()
 

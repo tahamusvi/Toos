@@ -13,6 +13,6 @@ urlpatterns = [
     path('is_buy/<slug:phoneNumber>/<slug:code>/',is_buy,name='is_buy'),
     path('suggested_course/<slug:phoneNumber>/',suggested_course,name='suggested_course'),
     path('user_courses/<slug:phoneNumber>/',user_courses,name='user_courses'),
-    path('user_courses/online/<slug:phoneNumber>/',user_courses_online,name='user_courses_online'),
+    # path('user_courses/online/<slug:phoneNumber>/',user_courses_online,name='user_courses_online'),
     path('fresh_course/',fresh_course,name='fresh_course'),
 ]

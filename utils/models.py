@@ -12,6 +12,14 @@ class WeekPlan(models.Model):
     def __str__(self):
         return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
+class TimeFromKonkur(models.Model):
+    title = models.CharField(max_length=100,blank=True, null=True)
+    days = models.IntegerField()
+    code = models.IntegerField(unique=True)
+    
+    def __str__(self):
+        return self.title
+# ----------------------------------------------------------------------------------------------------------------------------
 class Cover(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='covers/')

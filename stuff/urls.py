@@ -9,10 +9,11 @@ urlpatterns = [
     path('delete/stuff/<slug:phoneNumber>/<slug:code>/',delete_stuff),
     path('apply_coupon/<slug:phoneNumber>/<slug:coupon>/',apply_coupon),
     path('test/<slug:phoneNumber>/',test),
-    
+    path('stuff/count/<slug:phoneNumber>/',count_stuff),
+
 
 
     #Zarinpal
-    # path('zarin/request/<slug:phoneNumber>/', send_request, name='request'),
-    # path('zarin/verify/', verify , name='verify'),
+    path('zarin/request/<slug:phoneNumber>/', send_request, name='request'),
+    path('zarin/verify/', verify , name='verify'),
 ]

@@ -13,14 +13,14 @@ api's in api_views.py :
 2-onlineClass_get  --> get link online class
 3-teachers_kind_get --> get info teacher for a kind
 4-course_get --> get one courses
-5-kind_get --> kinds are Grouping of courses 
+5-kind_get --> kinds are Grouping of courses
 6-Package_get --> package ar grouping of kinds
 7-one_course_get --> return course information
 8-Suggested_course --> show some course Due to the user grade and kinds
 9-is_buy --> check user buy this course or not
 10-user_courses --> get corses that user has buy
-11-fresh_course --> get new courses 
-12-session_get --> get one course sessions 
+11-fresh_course --> get new courses
+12-session_get --> get one course sessions
 """
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
@@ -104,8 +104,8 @@ def is_buy(request,phoneNumber,code):
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     if user.courses.filter(code = code):
-        return Response({'Message':'user has bayed this course'}, status=status.HTTP_200_OK)
-    return Response({'Message':'user hasnt bayed this course'}, status=status.HTTP_200_OK)
+        return Response({'is_free':True}, status=status.HTTP_200_OK)
+    return Response({'is_free':False}, status=status.HTTP_200_OK)
 # -----------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -129,6 +129,8 @@ def user_courses(request,phoneNumber):
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     courses = Course.objects.filter(user = user).order_by('price')
+    print(courses)
+
 
     ser_data = courseSerializers(courses, many=True)
     return Response(ser_data.data, status=status.HTTP_200_OK)
