@@ -10,7 +10,7 @@ class TeacherSerializers(serializers.ModelSerializer):
 class OnlineClassSerializers(serializers.ModelSerializer):
     class Meta:
         model = OnlineClass
-        fields = ["title", "link"]
+        fields = ["title", "link","next_class","date"]
 # ----------------------------------------------------------------------------------------------------------------------------
 class courseSerializers(serializers.ModelSerializer):
     class Meta:

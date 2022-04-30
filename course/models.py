@@ -58,17 +58,7 @@ class News(models.Model):
         return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
 # class session
-# ----------------------------------------------------------------------------------------------------------------------------
-class OnlineClass(models.Model):
-    title = models.CharField(max_length=100,blank=True, null=True)
-    link = models.TextField()
 
-    #Filter for Users
-
-
-
-    def __str__(self):
-        return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
@@ -141,6 +131,24 @@ class Course(models.Model):
 
     def __str__(self):
         return str(self.title_persion)
+# ----------------------------------------------------------------------------------------------------------------------------
+class OnlineClass(models.Model):
+    title = models.CharField(max_length=100,blank=True, null=True)
+    link = models.TextField()
+    next_class = models.CharField(max_length=200,blank=True, null=True)
+    course = models.ForeignKey(
+        Course, blank=True, null=True, related_name="onlineClass", on_delete=models.CASCADE)
+    #Date
+    day = models.IntegerField()
+    month = models.IntegerField()
+    year = models.IntegerField()
+
+
+    def date(self):
+        return f'{self.year}/{self.month}/{self.day}'
+
+    def __str__(self):
+        return self.course.title_persion + " " + self.title
 # ----------------------------------------------------------------------------------------------------------------------------
 from django.conf import settings
 class Course_buyer(models.Model):
