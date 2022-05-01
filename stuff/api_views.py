@@ -247,9 +247,9 @@ def verify(request):
                 cart.save()
                 user.cart = cart
                 user.save()
-
+# ['data']['ref_id']
                 return HttpResponse('Transaction success.\nRefID: ' + str(
-                    req.json()['data']['ref_id']
+                    req.json()
                 ))
             elif t_status == 101:
                 return HttpResponse('Transaction submitted : ' + str(

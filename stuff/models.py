@@ -59,9 +59,10 @@ class Stuff(models.Model):
 # ----------------------------------------------------------------------------------------------------------------------------
 class Receipt(models.Model):
     text = models.TextField()
-    code = models.IntegerField(blank=True, null=True,unique=True)
+    code = models.DecimalField(max_digits=5, decimal_places=0,unique=True)
     course = models.ForeignKey(Course,blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
+    pay = models.IntegerField(default=0,blank=True, null=True)
 
     def __str__(self):
         return f"{self.user}-{self.code}"
