@@ -66,4 +66,7 @@ class Receipt(models.Model):
 
     def __str__(self):
         return f"{self.user}-{self.code}"
+
+    def Course_Detail(self):
+        return self.course.title_persion
 # ----------------------------------------------------------------------------------------------------------------------------

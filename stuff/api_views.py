@@ -148,6 +148,21 @@ def apply_coupon(request,phoneNumber,coupon):
 # ----------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def User_Receipt(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    receipt = user.receipt.all()
+
+    data = GetReceipt(receipt,many=True)
+
+
+    return Response({'re':data.data}, status=status.HTTP_200_OK)
+# ----------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def count_stuff(request,phoneNumber):
     try:
         user = User.objects.get(phoneNumber=phoneNumber)

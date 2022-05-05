@@ -10,6 +10,7 @@ urlpatterns = [
     path('apply_coupon/<slug:phoneNumber>/<slug:coupon>/',apply_coupon),
     path('test/<slug:phoneNumber>/',test),
     path('stuff/count/<slug:phoneNumber>/',count_stuff),
+    path('receipt/<slug:phoneNumber>/',User_Receipt),
 
 
 
