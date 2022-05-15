@@ -12,12 +12,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
+import requests
 VALIDATION_CODE = 'fdgfdhj67867sdfsf2343nh'
+Sms_link = 'http://www.0098sms.com/sendsmslink.aspx?FROM=300057341485&TO=phoneNumber&TEXT=کد+:+code&USERNAME=smsa5429&PASSWORD=66578289&DOMAIN=0098'
 # -------------------------------------------------------------------------------------------------------------------------------
 """
 api's in api_views.py :
 
-1-change_password --> change user password  
+1-change_password --> change user password
 2-user_create  --> create one account with phoneNumber & National Code
 3-code_get --> get code for Account validation
 4-user_update --> fill other information the user
@@ -64,6 +66,9 @@ def user_create(request):
              is_active=False,
              code=code).save()
         # send Code to User
+        # temp = Sms_link.replace("phoneNumber",info.validated_data['phoneNumber'])
+        # temp = temp.replace("code",str(code))
+        # response = requests.get(temp)
         return Response({'message': 'ok', 'code': f'{code}'}, status=status.HTTP_201_CREATED)
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -82,6 +87,9 @@ def code_get(request, phoneNumber):
         # send Code to User
         user.code = code
         user.save()
+        # temp = Sms_link.replace("phoneNumber",info.validated_data['phoneNumber'])
+        # temp = temp.replace("code",str(code))
+        # response = requests.get(temp)
         return Response({'message': 'ok', 'code': f'{code}'}, status=status.HTTP_201_CREATED)
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -104,6 +112,8 @@ def user_update(request, phoneNumber):
         user.grade = user.grade_obj.title
         user.is_active = True
         user.set_password(info.validated_data['password'])
+        print(VALIDATION_CODE_FRONT)
+        print(VALIDATION_CODE)
         if VALIDATION_CODE_FRONT == VALIDATION_CODE:
             cart = Cart(user=user)
             cart.save()
@@ -113,6 +123,7 @@ def user_update(request, phoneNumber):
         else:
             return Response({'message': 'Validet Token is NOT True!'}, status=status.HTTP_400_BAD_REQUEST)
     else:
+        print("what")
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])

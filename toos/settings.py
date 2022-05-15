@@ -1,8 +1,13 @@
 from corsheaders.defaults import default_headers
 from pathlib import Path
 import os
+# from dotenv import load_dotenv
+# load_dotenv()
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-(q)ipbsf*%jpq#+cft73@7mpbmg3go*#eemnw7+7vkxbq+eunj'
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'fddsfdfhgfhjh34987rnewmfnuiwrwhfjndv'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]

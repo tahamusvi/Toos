@@ -32,11 +32,19 @@ def teachers_get(request):
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def onlineClass_get(request):
-    #add filter
-    onlineClass = OnlineClass.objects.all()
-    ser_data = OnlineClassSerializers(onlineClass, many=True)
-    return Response(ser_data.data, status=status.HTTP_200_OK)
+def onlineClass_get(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    data = {}
+    courses = user.courses.all()
+    for course in courses:
+        ser_data = OnlineClassSerializers(course.onlineClass, many=True)
+        data[course.title_en] = ser_data.data
+
+    return Response(data, status=status.HTTP_200_OK)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
