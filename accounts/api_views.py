@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
 from .serializers import *
 from .models import User
 from rest_framework import status
-from stuff.models import Cart
+from stuff.models import Cart,Department
 from course.models import Grade
 from random import randint
 from django.contrib.auth.hashers import check_password
@@ -101,7 +101,8 @@ def user_update(request, phoneNumber):
         user = User.objects.get(phoneNumber=phoneNumber)
     except User.DoesNotExist:
         return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
-    info = UserSerializersUpdate(user, data=request.data)
+    # info = UserSerializersUpdate(user, data=request.data)
+    info = UserSerializersUpdate(data=request.data)
 
     if info.is_valid():
         user.firstName = info.validated_data['firstName']
@@ -118,6 +119,9 @@ def user_update(request, phoneNumber):
             cart = Cart(user=user)
             cart.save()
             user.cart = cart
+            department = Department(user=user)
+            department.save()
+            user.department = department
             user.save()
             return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
         else:

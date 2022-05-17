@@ -102,6 +102,18 @@ def get_cart(request,phoneNumber):
 # ----------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def get_receipts(request,phoneNumber):
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+    recepts = user.department.receipt.all()
+    data = ReceiptsSerializer(recepts, many=True)
+
+    return Response(data.data, status=status.HTTP_200_OK)
+# ----------------------------------------------------------------------------------------------------------------------------
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_total(request,phoneNumber):
     try:
         user = User.objects.get(phoneNumber=phoneNumber)
@@ -231,7 +243,7 @@ def send_request(request,phoneNumber):
         e_message = req.json()['errors']['message']
         return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
 
-
+import random
 
 def verify(request):
 
@@ -254,13 +266,35 @@ def verify(request):
             if t_status == 100:
 
                 stuffs = user.cart.stuff.all()
+
+                text_receipt = ""
+
+
                 for stuff in stuffs :
                     user.courses.add(stuff.course)
+                    text_receipt += stuff.course.title_persion + " - "
+
+                receipt = Receipt(
+                pay=amount,
+                code=random.randint(1000, 9999),
+                text=text_receipt,
+                Hash_code=req.json()['data']['card_hash']
+                )
+
+
+                # for stuff in stuffs :
+                #     receipt.courses.add(stuff.course)
+
+                receipt.department = user.department
+                receipt.save()
 
                 user.cart.delete()
                 cart = Cart(user=user)
                 cart.save()
                 user.cart = cart
+
+
+
                 user.save()
 # ['data']['ref_id']
                 return HttpResponse('Transaction success.\nRefID: ' + str(

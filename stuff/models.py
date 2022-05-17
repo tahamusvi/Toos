@@ -57,15 +57,30 @@ class Stuff(models.Model):
      def __str__(self):
          return str(self.title)
 # ----------------------------------------------------------------------------------------------------------------------------
+class Department(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='department')
+    def __str__(self):
+        return f'{self.user}'
+
+# ----------------------------------------------------------------------------------------------------------------------------
+from jalali_date import datetime2jalali, date2jalali
+
+
 class Receipt(models.Model):
+    department = models.ForeignKey(Department,blank=True, null=True, on_delete=models.CASCADE,related_name='receipt')
     text = models.TextField()
     code = models.DecimalField(max_digits=5, decimal_places=0,unique=True)
-    course = models.ForeignKey(Course,blank=True, null=True, on_delete=models.CASCADE)
+    courses = models.ManyToManyField(Course ,blank=True,related_name="receipt")
     created = models.DateTimeField(auto_now_add=True)
+    Hash_code = models.CharField(max_length=500)
     pay = models.IntegerField(default=0,blank=True, null=True)
+
 
     def __str__(self):
         return f"{self.user}-{self.code}"
+
+    def date(self):
+        return str(14)+datetime2jalali(self.created).strftime('%y/%m/%d')
 
     def Course_Detail(self):
         return self.course.title_persion
