@@ -43,8 +43,13 @@ def onlineClass_get(request,phoneNumber):
     for course in courses:
         ser_data = OnlineClassSerializers(course.onlineClass, many=True)
         data[course.title_en] = ser_data.data
+        break
 
-    return Response(data, status=status.HTTP_200_OK)
+    for course in courses:
+        ser_data.data.append(OnlineClassSerializers(course.onlineClass, many=True))
+
+
+    return Response(ser_data.data, status=status.HTTP_200_OK)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['GET'])
 @permission_classes([AllowAny])

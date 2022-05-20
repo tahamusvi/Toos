@@ -53,6 +53,25 @@ def change_password(request, phoneNumber):
                 return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
     else:
         return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# -------------------------------------------------------------------------------------------------------------------------------
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def change_password_without_old(request, phoneNumber):
+    info = ChangePasswordSerializersValid(data=request.data)
+    try:
+        user = User.objects.get(phoneNumber=phoneNumber)
+    except User.DoesNotExist:
+        return Response({'error': 'this user does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+    if info.is_valid():
+        user.set_password(info.validated_data['password'])
+        VALIDATION_CODE_FRONT = info.validated_data['VALIDATION_CODE']
+        if VALIDATION_CODE_FRONT == VALIDATION_CODE:
+            user.save()
+            return Response({'message': 'ok is updated'}, status=status.HTTP_200_OK)
+    else:
+        return Response(info.errors, status=status.HTTP_400_BAD_REQUEST)
 # -------------------------------------------------------------------------------------------------------------------------------
 @api_view(['POST'])
 @permission_classes([AllowAny])

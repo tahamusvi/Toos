@@ -25,7 +25,7 @@ class KindSerializers(serializers.ModelSerializer):
 class SessionSerializer(serializers.ModelSerializer):
    class Meta:
       model = Session_coruse
-      fields = ["title","text","link",'time']
+      fields = ["title","text","link",'time','is_free']
 # -------------------------------------------------------------------------------------------------------------------------------
 class PackageSerializers(serializers.ModelSerializer):
     class Meta:

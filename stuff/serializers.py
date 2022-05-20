@@ -13,7 +13,7 @@ class StuffSerializer(serializers.ModelSerializer):
 class ReceiptsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Receipt
-        fields = ["text","Hash_code","pay",'date']
+        fields = ["text","hash_code_simple","pay",'date']
 # -------------------------------------------------------------------------------------------------------------------------------
 class GetTotalPrice(serializers.ModelSerializer):
 	phoneNumber = serializers.CharField()

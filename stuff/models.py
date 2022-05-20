@@ -78,6 +78,9 @@ class Receipt(models.Model):
 
     def __str__(self):
         return f"{self.user}-{self.code}"
+    
+    def hash_code_simple(self):
+        return self.Hash_code[0:10]
 
     def date(self):
         return str(14)+datetime2jalali(self.created).strftime('%y/%m/%d')
