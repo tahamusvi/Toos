@@ -8,6 +8,10 @@ media
 media/
 react
 env
+static/
+static
+
+
 
 # Backup files #
 *.bak

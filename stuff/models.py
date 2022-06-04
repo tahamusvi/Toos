@@ -2,6 +2,7 @@ from django.db import models
 from course.models import *
 from django.conf import settings
 from django.core.validators import MinValueValidator,MaxValueValidator
+from django.utils import timezone
 
 
 # ----------------------------------------------------------------------------------------------------------------------------
@@ -18,8 +19,8 @@ class Coupon(models.Model):
 # ----------------------------------------------------------------------------------------------------------------------------
 class Cart(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,related_name='cart')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(default=datetime.now)
+    updated = models.DateTimeField(default=datetime.now)
     total_peyment = models.IntegerField(default=0,blank=True, null=True)
     paid = models.BooleanField(default=False)
     coupon = models.OneToOneField(Coupon,on_delete=models.CASCADE,blank=True, null=True)
@@ -71,14 +72,14 @@ class Receipt(models.Model):
     text = models.TextField()
     code = models.DecimalField(max_digits=5, decimal_places=0,unique=True)
     courses = models.ManyToManyField(Course ,blank=True,related_name="receipt")
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.now)
     Hash_code = models.CharField(max_length=500)
     pay = models.IntegerField(default=0,blank=True, null=True)
 
 
     def __str__(self):
         return f"{self.user}-{self.code}"
-    
+
     def hash_code_simple(self):
         return self.Hash_code[0:10]
 
