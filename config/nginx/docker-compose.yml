@@ -1,0 +1,25 @@
+version : '3'
+
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - farline_static_volume:/Toss-master/media
+      - farline_files_volume:/Toos-master/farline_files_volume
+    networks:
+      -nginx_network
+
+volumes:
+  farline_static_volume:
+    external: true
+  farline_files_volume:
+    external: true
+networks:
+  nginx_network:
+    external: true\

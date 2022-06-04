@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-
+from django.utils import timezone
 
 class Grade(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
@@ -76,7 +76,8 @@ class Session_coruse(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
     text = models.TextField(blank=True, null=True)
     link = models.CharField(max_length=300,blank=True, null=True)
-    time = models.TimeField(blank=True, default=datetime.now)
+    time = models.TimeField(blank=True)
+    # , default=timezone.now()
     video = models.FileField(blank=True, null=True)
     is_free = models.BooleanField(default=False)
     def __str__(self):
@@ -98,7 +99,7 @@ class Course(models.Model):
         Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     code = models.IntegerField(unique=True)
     is_online = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.now)
     Text = models.TextField()
     video_preview = models.FileField(blank=True, null=True)
     sessions = models.ManyToManyField(Session_coruse, related_name="course")
