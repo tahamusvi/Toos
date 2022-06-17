@@ -244,6 +244,7 @@ def send_request(request,phoneNumber):
         return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
 
 import random
+from django.shortcuts import redirect
 
 def verify(request):
 
@@ -297,9 +298,7 @@ def verify(request):
 
                 user.save()
 # ['data']['ref_id']
-                return HttpResponse('Transaction success.\nRefID: ' + str(
-                    req.json()
-                ))
+                return redirect('react')
             elif t_status == 101:
                 return HttpResponse('Transaction submitted : ' + str(
                     req.json()['data']['message']

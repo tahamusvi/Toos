@@ -123,26 +123,26 @@ WSGI_APPLICATION = 'toos.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # SQLITE
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # PSG
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'farline_postgresql',
-        'PORT': '5432',
-    }
-}
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'farline_postgresql',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -181,14 +181,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.path.join(BASE_DIR, 'staticfiles/')
 STATIC_ROOT = '/static/'
 
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'react/build/static/'),
-    os.path.join(BASE_DIR, 'media/'),
-    os.path.join(BASE_DIR, 'static/'),
+    os.path.join(BASE_DIR, 'react/build/'),
+    # os.path.join(BASE_DIR, 'media/'),
+    # os.path.join(BASE_DIR, 'static/'),
 ]
 
 # Default primary key field type

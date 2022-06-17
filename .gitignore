@@ -6,10 +6,7 @@ __pycache__
 db.sqlite3
 media
 media/
-react
 env
-static/
-static
 
 
 
@@ -86,7 +83,7 @@ celerybeat-schedule.*
 .env
 .venv
 env/
-react/
+
 venv/
 ENV/
 env.bak/

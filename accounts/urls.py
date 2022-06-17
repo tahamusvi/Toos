@@ -15,4 +15,5 @@ urlpatterns = [
     path('', include('rest_framework.urls')),
     path('user/info/<slug:phoneNumber>/', user_get, name='user_get'),
     path('csrf/', get_csrf_token.as_view(), name='csrf'),
+    path('redi/',redi),
 ]

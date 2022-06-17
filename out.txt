@@ -1,1 +1,0 @@
-CMD ["gunicorn","--chdir","farline","--bind",":8000","farline.wsgi:application"]
