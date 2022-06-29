@@ -139,7 +139,7 @@ DATABASES = {
         'NAME': 'dbpost',
         'USER': 'postgres',
         'PASSWORD': 'hNYTlIKOs2uWhNdiLBJpkVRvVKLAccAU',
-        'HOST': 'farlineedu',
+        'HOST': 'dbpost.farlineedu.svc',
         'PORT': '5432',
     }
 }
