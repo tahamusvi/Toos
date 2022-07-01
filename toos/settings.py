@@ -136,10 +136,10 @@ WSGI_APPLICATION = 'toos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbpost',
+        'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'hNYTlIKOs2uWhNdiLBJpkVRvVKLAccAU',
-        'HOST': 'dbpost.farlineedu.svc',
+        'HOST': 'postdb.farlineedu.svc',
         'PORT': '5432',
     }
 }
