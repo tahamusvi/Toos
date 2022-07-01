@@ -138,7 +138,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': 'hNYTlIKOs2uWhNdiLBJpkVRvVKLAccAU',
+        'PASSWORD': 'w5GOkaYKK2Vy5wNX15F39N5BgbVUMKer',
         'HOST': 'postdb.farlineedu.svc',
         'PORT': '5432',
     }
