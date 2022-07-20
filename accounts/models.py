@@ -5,12 +5,17 @@ from course.models import *
 from stuff.models import Receipt
 # ----------------------------------------------------------------------------------------------------------------------------
 class User(AbstractBaseUser):
+    """
+        main User object that extends django-user
+        username --> phoneNumber
+        email --> phoneNumber
+
+    """
     phoneNumber = models.CharField(unique=True, max_length=11)
     nationalCode = models.CharField(unique=True, max_length=10)
     firstName = models.CharField(max_length=100, null=True, blank=True)
     lastName = models.CharField(max_length=100, null=True, blank=True)
     is_admin = models.BooleanField(default=False)
-    # created = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     grade_obj = models.ForeignKey(
         Grade, on_delete=models.CASCADE, null=True, blank=True)
