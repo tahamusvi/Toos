@@ -30,14 +30,9 @@ api's in api_views.py :
 3-code_get --> get code for Account validation
 4-user_update --> fill other information the user
 5-user_get --> get info user
-
-api's in login.py :
-1-login --> login user
-
-api's in view.py :
-1-login --> login user
-2- GetCSRFToken --> get crrf token for login
-3-delete_user --> delete deactive account
+6-login --> login user
+7- GetCSRFToken --> get crrf token for login
+8-delete_user --> delete deactive account
 
 """
 # -------------------------------------------------------------------------------------------------------------------------------
