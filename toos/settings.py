@@ -1,12 +1,13 @@
 from corsheaders.defaults import default_headers
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = 'fddsfdfhgfhjh34987rnewmfnuiwrwhfjndv'
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
@@ -33,7 +34,35 @@ INSTALLED_APPS += [
     'utils',
     'course.apps.CourseConfig',
     'accounts.apps.AccountsConfig',
+    'jalali_date',
 ]
+
+JALALI_DATE_DEFAULTS = {
+   'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading datepicker
+            'admin/js/django_jalali.min.js',
+            # OR
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
+
+
+
 
 CORS_ALLOWED_ORIGINS = [
     "https://domain.com",
@@ -103,14 +132,14 @@ DATABASES = {
 
 
 # PSG
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'Toos_web',
+#         'NAME': 'postgres',
 #         'USER': 'postgres',
-#         'PASSWORD': '1234g5678',
-#         'HOST': '127.0.0.1',
+#         'PASSWORD': 'w5GOkaYKK2Vy5wNX15F39N5BgbVUMKer',
+#         'HOST': 'postdb.farlineedu.svc',
 #         'PORT': '5432',
 #     }
 # }
@@ -154,11 +183,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
-
+# STATIC_ROOT =  os.path.join(BASE_DIR, 'static/')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'react/build/static/'),
-    os.path.join(BASE_DIR, 'media/'),
+    # os.path.join(BASE_DIR, 'react/build/'),
+    # os.path.join(BASE_DIR, 'media/'),
+    # os.path.join(BASE_DIR, 'static/'),
 ]
 
 # Default primary key field type

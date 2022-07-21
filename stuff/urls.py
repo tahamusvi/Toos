@@ -11,7 +11,7 @@ urlpatterns = [
     path('test/<slug:phoneNumber>/',test),
     path('stuff/count/<slug:phoneNumber>/',count_stuff),
     path('receipt/<slug:phoneNumber>/',User_Receipt),
-
+    path('get_receipts/<slug:phoneNumber>/',get_receipts),
 
 
     #Zarinpal

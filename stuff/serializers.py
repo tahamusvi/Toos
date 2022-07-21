@@ -10,6 +10,11 @@ class StuffSerializer(serializers.ModelSerializer):
         model = Stuff
         fields = []
 # -------------------------------------------------------------------------------------------------------------------------------
+class ReceiptsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Receipt
+        fields = ["text","hash_code_simple","pay",'date']
+# -------------------------------------------------------------------------------------------------------------------------------
 class GetTotalPrice(serializers.ModelSerializer):
 	phoneNumber = serializers.CharField()
 	class Meta:
@@ -28,7 +33,7 @@ class GetCartPrice(serializers.ModelSerializer):
 class GetReceipt(serializers.ModelSerializer):
 	class Meta:
 		model = Receipt
-		fields = ['text','code','Course_Detail','created','pay']	
+		fields = ['text','code','Course_Detail','created','pay']
 # -------------------------------------------------------------------------------------------------------------------------------
 class ApplyCouponSerializer(serializers.ModelSerializer):
 	coupon_text = serializers.CharField()

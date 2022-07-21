@@ -1,15 +1,46 @@
 from django.db import models
 from datetime import datetime
-
+from django.utils import timezone
 
 class Grade(models.Model):
+    """
+        Create this Grade in database
+        codes:
+        نهم : ۶
+        هشتم : ۵
+        هفتم : ۴
+        دوازدهم : ۳
+        یازدهم : ۲
+        دهم : ۱
+
+    """
     title = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='grade/')
 
     def __str__(self):
         return self.title
-# -----------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------
 class Package(models.Model):
+    """
+        Create this packages in databse
+        {
+            title : کنکور
+            icon : 1
+            code : IoMdSchool
+        }
+        {
+            title : پایه
+            icon : 2
+            code : FaSchool
+        }
+        {
+            title : دوره اول
+            icon : 2
+            code : GiSchoolBag
+        }
+
+
+    """
     title = models.CharField(max_length=100,blank=True, null=True)
     icon = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='package/')
@@ -30,8 +61,21 @@ class Package(models.Model):
         return f'پکیج-های-آموزشی-{temp}'
     def show_title(self):
         return f'پکیج های {self.title}'
-# -----------------------------------
+# -------------------------------------------------------------------------------------------------------------------------------
 class Kind(models.Model):
+    """
+        Create this kind in database
+        codes:
+        جامع سالیانه : ۷
+        همایش : ۸
+        نکته و تست : ۶
+        نهم : ۵
+        هشتم : ۴
+        هفتم : ۳
+        یازدهم : ۲
+        دهم : ۱
+
+    """
     title = models.CharField(max_length=100,blank=True, null=True)
     picture = models.ImageField(upload_to ='kind/')
     code = models.IntegerField(unique=True)
@@ -44,7 +88,6 @@ class Kind(models.Model):
 
     def __str__(self):
         return self.title
-
 # ----------------------------------------------------------------------------------------------------------------------------
 class News(models.Model):
     title = models.CharField(max_length=100,blank=True, null=True)
@@ -57,10 +100,10 @@ class News(models.Model):
     def __str__(self):
         return self.title
 # ----------------------------------------------------------------------------------------------------------------------------
-# class session
-
-# ----------------------------------------------------------------------------------------------------------------------------
 class Teacher(models.Model):
+    """
+        a model for teachers for show info in landing page front and create course for teachers
+    """
     name = models.CharField(max_length=100)
     picture = models.ImageField(upload_to='teachers')
     lesson = models.TextField()
@@ -73,11 +116,16 @@ class Teacher(models.Model):
         return str(self.name)
 # ----------------------------------------------------------------------------------------------------------------------------
 class Session_coruse(models.Model):
+    """
+        part of Course
+    """
     title = models.CharField(max_length=100,blank=True, null=True)
     text = models.TextField(blank=True, null=True)
     link = models.CharField(max_length=300,blank=True, null=True)
-    time = models.TimeField(blank=True, default=datetime.now)
+    time = models.TimeField(blank=True)
+    # , default=timezone.now()
     video = models.FileField(blank=True, null=True)
+    is_free = models.BooleanField(default=False)
     def __str__(self):
         return str(self.title)
 # ----------------------------------------------------------------------------------------------------------------------------
@@ -97,7 +145,7 @@ class Course(models.Model):
         Teacher, blank=True, null=True, related_name="course", on_delete=models.CASCADE)
     code = models.IntegerField(unique=True)
     is_online = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.now)
     Text = models.TextField()
     video_preview = models.FileField(blank=True, null=True)
     sessions = models.ManyToManyField(Session_coruse, related_name="course")

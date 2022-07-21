@@ -15,7 +15,7 @@ class OnlineClassSerializers(serializers.ModelSerializer):
 class courseSerializers(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ["title_persion", "title_en", "picture","grade","code","price","teacher_name","path","count_session","time","count_user"]
+        fields = ["title_persion", "title_en", "picture","grade","code","price","teacher_name","path","count_session","time","count_user","Text"]
 # -------------------------------------------------------------------------------------------------------------------------------
 class KindSerializers(serializers.ModelSerializer):
     class Meta:
@@ -25,7 +25,7 @@ class KindSerializers(serializers.ModelSerializer):
 class SessionSerializer(serializers.ModelSerializer):
    class Meta:
       model = Session_coruse
-      fields = ["title","text","link",'time']
+      fields = ["title","text","link",'time','is_free']
 # -------------------------------------------------------------------------------------------------------------------------------
 class PackageSerializers(serializers.ModelSerializer):
     class Meta:
